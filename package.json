@@ -1,0 +1,30 @@
+{
+  "name": "@asaitoshiya/octo-log",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "GitHub の自分のすべてのリポジトリのコミット ログを横断的に表示するコマンド ライン ツールです",
+  "exports": "./index.js",
+  "bin": {
+    "octo-log": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AsaiToshiya/octo-log.git"
+  },
+  "keywords": [],
+  "author": "Asai Toshiya <to.asai.60@gmail.com> (https://asaitoshiya.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AsaiToshiya/octo-log/issues"
+  },
+  "homepage": "https://github.com/AsaiToshiya/octo-log#readme",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "dependencies": {
+    "@octokit/rest": "^18.12.0"
+  }
+}
