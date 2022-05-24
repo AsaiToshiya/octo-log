@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Octokit } from "@octokit/rest";
 
 const args = process.argv.slice(2);
