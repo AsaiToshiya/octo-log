@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { Octokit } from "@octokit/rest";
 
+const COUNT = 30;
+
 const args = process.argv.slice(2);
 const [option, token] = args;
 
@@ -35,7 +37,7 @@ if ((option != "-t" && option != "--token") || !token) {
   }
   const sortedLogs = logs
     .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 30);
+    .slice(0, COUNT);
 
   for (const log of sortedLogs) {
     const sha = log.sha.substr(0, 7);
