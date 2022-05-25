@@ -43,8 +43,8 @@ if ((option != "-t" && option != "--token") || !token) {
     .slice(0, COUNT);
 
   for (const log of logs) {
-    const sha = log.sha.substr(0, 7);
+    const hash = log.sha.substr(0, 7);
     const message = log.message.split(/\r?\n/)[0];
-    console.log(`${sha} (${log.repo}) ${message}`);
+    console.log(`${hash} (${log.repo}) ${message}`);
   }
 })();
