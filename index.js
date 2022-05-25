@@ -16,25 +16,24 @@ if ((option != "-t" && option != "--token") || !token) {
     auth: token,
   });
 
-  const logs = [];
-  const repos = await octokit.repos.listForAuthenticatedUser({
+  const logs = (await Promise.all((await octokit.repos.listForAuthenticatedUser({
     sort: "pushed",
     direction: "desc",
-  });
-  for (const repo of repos.data) {
-    const commits = await octokit.rest.repos.listCommits({
+  })).data
+  .map(async(repo ) =>
+    ( await octokit.rest.repos.listCommits({
       owner: repo.owner.login,
       repo: repo.name,
-    });
-    for (const commit of commits.data) {
-      logs.push({
+  })).data
+  .map(( commit ) =>
+      ({
         repo: repo.name,
         sha: commit.sha,
         date: commit.commit.author.date,
         message: commit.commit.message,
-      });
-    }
-  }
+      })
+    )
+  ))).flat();
   const sortedLogs = logs
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, COUNT);
