@@ -37,12 +37,12 @@ if ((option != "-t" && option != "--token") || !token) {
         }))
       )
     )
-  ).flat();
-  const sortedLogs = logs
+  )
+    .flat()
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, COUNT);
 
-  for (const log of sortedLogs) {
+  for (const log of logs) {
     const sha = log.sha.substr(0, 7);
     const message = log.message.split(/\r?\n/)[0];
     console.log(`${sha} (${log.repo}) ${message}`);
