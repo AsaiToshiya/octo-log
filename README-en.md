@@ -1,33 +1,33 @@
-日本語 | [English](./README-en.md)
+[日本語](./README.md) | English
   
 # octo-log
 
-octo-log は、GitHub の自分のすべてのリポジトリのコミット ログを横断的に表示するコマンド ライン ツールです。
+octo-log is a command line tool that show commit logs of own all GitHub repos.
 
 
-## インストール
+## Install
 
 ```bash
 npm i -g @asaitoshiya/octo-log
 ```
 
-### GitHub トークンを生成
+### Create a GitHub token
 
-  1. https://github.com/settings/tokens を開く
-  2. 「Generate new token」をクリックする
-  3. 「Note」に「octo-log」を入力する
-  4. 「Select scopes」で「repo」を選択する
-  5. 「Generate token」をクリックする
+  1. Visit https://github.com/settings/tokens
+  2. Click on "Generate new token"
+  3. Type "octo-log" in "Note"
+  4. Select "repo" under "Select scopes"
+  5. Click on "Generate token"
 
 
-## 使い方
+## Usage
 
 ```bash
 octo-log (-t|--token) <token>
 ```
 
 
-## ライセンス
+## License
 
     MIT License
     
