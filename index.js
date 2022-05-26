@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 import { Octokit } from "@octokit/rest";
 
+const RESET = "\x1b[0m";
+const YELLOW = "\x1b[33m";
+
 const COUNT = 30;
 
 const args = process.argv.slice(2);
@@ -45,6 +48,8 @@ if ((option != "-t" && option != "--token") || !token) {
   for (const log of logs) {
     const hash = log.sha.substr(0, 7);
     const message = log.message.split(/\r?\n/)[0];
-    console.log(`${hash} (${log.repo}) ${message}`);
+    console.log(
+      `${YELLOW}${hash} (${RESET}${log.repo}${YELLOW})${RESET} ${message}`
+    );
   }
 })();
