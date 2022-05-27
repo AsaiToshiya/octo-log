@@ -6,20 +6,12 @@ const YELLOW = "\x1b[33m";
 
 const COUNT = 30;
 
-const args = process.argv.slice(2);
-const [option, token] = args;
-
-if ((option != "-t" && option != "--token") || !token) {
-  console.log("octo-log (-t|--token) <token>");
-  process.exit();
-}
-
-(async () => {
+const fetchLogs = async (token) => {
   const octokit = new Octokit({
     auth: token,
   });
 
-  const logs = (
+  return (
     await Promise.all(
       (
         await octokit.repos.listForAuthenticatedUser({
@@ -40,8 +32,19 @@ if ((option != "-t" && option != "--token") || !token) {
         }))
       )
     )
-  )
-    .flat()
+  ).flat();
+};
+
+const args = process.argv.slice(2);
+const [option, token] = args;
+
+if ((option != "-t" && option != "--token") || !token) {
+  console.log("octo-log (-t|--token) <token>");
+  process.exit();
+}
+
+(async () => {
+  const logs = (await fetchLogs(token))
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, COUNT);
 
