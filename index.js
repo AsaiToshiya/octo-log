@@ -18,17 +18,17 @@ const fetchLogs = async (token) => {
           sort: "pushed",
           direction: "desc",
         })
-      ).data.map(async (repo) =>
+      ).data.map(async ({ owner, name }) =>
         (
           await octokit.rest.repos.listCommits({
-            owner: repo.owner.login,
-            repo: repo.name,
+            owner: owner.login,
+            repo: name,
           })
-        ).data.map((commit) => ({
-          repo: repo.name,
-          sha: commit.sha,
-          date: commit.commit.author.date,
-          message: commit.commit.message,
+        ).data.map(({ sha, commit }) => ({
+          repo: name,
+          sha,
+          date: commit.author.date,
+          message: commit.message,
         }))
       )
     )
