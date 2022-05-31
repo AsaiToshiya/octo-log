@@ -6,7 +6,7 @@ const YELLOW = "\x1b[33m";
 
 const COUNT = 30;
 
-const fetchLogs = async (token) => {
+const fetchLogs = async (token, author) => {
   const octokit = new Octokit({
     auth: token,
   });
@@ -23,6 +23,7 @@ const fetchLogs = async (token) => {
           await octokit.rest.repos.listCommits({
             owner: owner.login,
             repo: name,
+            author: author ? author : undefined,
           })
         ).data.map(({ sha, commit }) => ({
           repo: name,
@@ -36,15 +37,23 @@ const fetchLogs = async (token) => {
 };
 
 const args = process.argv.slice(2);
-const [option, token] = args;
+const [option1, value1, option2, value2] = args;
+const token =
+  option1 == "-t" || option1 == "--token"
+    ? value1
+    : option2 == "-t" || option2 == "--token"
+    ? value2
+    : null;
+const author =
+  option1 == "--author" ? value1 : option2 == "--author" ? value2 : null;
 
-if ((option != "-t" && option != "--token") || !token) {
-  console.log("octo-log (-t|--token) <token>");
+if (!token || (args.includes("--author") && !author)) {
+  console.log("octo-log (-t|--token) <token> [--author <author>]");
   process.exit();
 }
 
 (async () => {
-  const logs = (await fetchLogs(token))
+  const logs = (await fetchLogs(token, author))
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, COUNT);
 
