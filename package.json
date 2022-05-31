@@ -1,6 +1,6 @@
 {
   "name": "@asaitoshiya/octo-log",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "description": "GitHub の自分のすべてのリポジトリのコミット ログを横断的に表示するコマンド ライン ツールです",
   "exports": "./index.js",
