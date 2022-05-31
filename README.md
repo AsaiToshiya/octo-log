@@ -23,7 +23,7 @@ npm i -g @asaitoshiya/octo-log
 ## 使い方
 
 ```bash
-octo-log (-t|--token) <token>
+octo-log (-t|--token) <token> [--author <author>]
 ```
 
 
